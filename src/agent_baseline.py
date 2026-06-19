@@ -29,8 +29,8 @@ class BaselineAgent:
         self.force_offline = force_offline
         self.sessions: dict[str, SessionState] = {}
 
-        # TODO: optionally initialize a real LangChain/LangGraph agent when dependencies exist.
         self.langchain_agent = None
+        self._maybe_build_langchain_agent()
 
     def reply(self, user_id: str, thread_id: str, message: str) -> dict[str, Any]:
         """Student TODO: return the agent response and token accounting.
@@ -39,16 +39,48 @@ class BaselineAgent:
         - If a live agent exists, call the live path.
         - Otherwise use a deterministic offline path.
         """
+        # Ensure session exists
+        session = self.sessions.setdefault(thread_id, SessionState())
 
-        raise NotImplementedError
+        # Prefer a live agent if available and allowed
+        if self.langchain_agent and not self.force_offline:
+            reply_text = self.langchain_agent.predict(message)
+            session.messages.append({"role": "assistant", "content": reply_text})
+            user_tokens = estimate_tokens(message)
+            reply_tokens = estimate_tokens(reply_text)
+            prompt_tokens = estimate_tokens(message)
+            session.token_usage += reply_tokens
+            session.prompt_tokens_processed += prompt_tokens
+            return {
+                "thread_id": thread_id,
+                "reply": reply_text,
+                "token_usage": self.token_usage(thread_id),
+                "prompt_tokens_processed": self.prompt_token_usage(thread_id),
+            }
+
+        # Fallback to offline deterministic reply
+        result = self._reply_offline(thread_id, message)
+        # Return the full result including accounting
+        return {
+            "thread_id": thread_id,
+            "reply": result.get("reply"),
+            "token_usage": self.token_usage(thread_id),
+            "prompt_tokens_processed": self.prompt_token_usage(thread_id),
+        }
 
     def token_usage(self, thread_id: str) -> int:
         # TODO: return cumulative agent token count for one thread.
-        raise NotImplementedError
+        s = self.sessions.get(thread_id)
+        if not s:
+            return 0
+        return int(s.token_usage)
 
     def prompt_token_usage(self, thread_id: str) -> int:
         # TODO: estimate how much prompt context this baseline kept processing.
-        raise NotImplementedError
+        s = self.sessions.get(thread_id)
+        if not s:
+            return 0
+        return int(s.prompt_tokens_processed)
 
     def compaction_count(self, thread_id: str) -> int:
         # Baseline has no compact memory.
@@ -64,7 +96,30 @@ class BaselineAgent:
         - Never remember facts across different thread ids
         """
 
-        raise NotImplementedError
+        session = self.sessions.setdefault(thread_id, SessionState())
+
+        # store user message
+        session.messages.append({"role": "user", "content": message})
+
+        # deterministic short reply: echo with guidance
+        reply_text = f"Tôi đã ghi nhận: {message[:240]}"
+
+        # store agent message
+        session.messages.append({"role": "assistant", "content": reply_text})
+
+        # token accounting
+        # estimate tokens for the new user message and reply
+        user_tokens = estimate_tokens(message)
+        reply_tokens = estimate_tokens(reply_text)
+
+        # baseline processes entire session as prompt each time
+        all_text = "\n".join(m["content"] for m in session.messages)
+        prompt_tokens = estimate_tokens(all_text)
+
+        session.token_usage += reply_tokens
+        session.prompt_tokens_processed += prompt_tokens
+
+        return {"reply": reply_text, "user_tokens": user_tokens, "reply_tokens": reply_tokens, "prompt_tokens": prompt_tokens}
 
     def _maybe_build_langchain_agent(self):
         """Student TODO: optionally wire `create_agent` + `InMemorySaver` here.
@@ -72,4 +127,5 @@ class BaselineAgent:
         Use `build_chat_model(self.config.model)` so the baseline can run with any supported provider.
         """
 
-        raise NotImplementedError
+        self.langchain_agent = build_chat_model(self.config.model)
+        return self.langchain_agent

@@ -1,0 +1,33 @@
+agent,conv_id,user_id,question,expected,reply,recall_pass,token_usage,prompt_tokens,memory_file_bytes,compactions
+baseline,conv-01,dungct,Mình tên gì và đồ uống yêu thích là gì?,"[""DũngCT"", ""cà phê sữa đá""]",Tôi đã ghi nhận: Mình tên gì và đồ uống yêu thích là gì?,False,178,1826,,0
+baseline,conv-02,dungct,Nhắc lại style trả lời mình thích và đồ uống yêu thích của mình.,"[""ngắn gọn"", ""cà phê sữa đá""]",Tôi đã ghi nhận: Nhắc lại style trả lời mình thích và đồ uống yêu thích của mình.,False,192,2023,,0
+baseline,conv-02,dungct,Tên mình là gì và mình thích kiểu trả lời như thế nào?,"[""DũngCT"", ""ngắn gọn""]",Tôi đã ghi nhận: Tên mình là gì và mình thích kiểu trả lời như thế nào?,False,210,2393,,0
+baseline,conv-03,dungct,Hiện tại mình đang ở đâu?,"[""Huế""]",Tôi đã ghi nhận: Hiện tại mình đang ở đâu?,False,202,2172,,0
+baseline,conv-04,dungct,Món ăn yêu thích của mình là gì và mình nuôi con gì?,"[""mì Quảng"", ""corgi""]",Tôi đã ghi nhận: Món ăn yêu thích của mình là gì và mình nuôi con gì?,False,207,2103,,0
+baseline,conv-05,dungct,Bạn biết DũngCT là ai không? Hãy nhắc ngắn gọn tên và mối quan tâm chính của mình.,"[""DũngCT"", ""Python"", ""AI""]",Tôi đã ghi nhận: Bạn biết DũngCT là ai không? Hãy nhắc ngắn gọn tên và mối quan tâm chính của mình.,False,209,2107,,0
+baseline,conv-06,dungct,Hiện tại mình làm nghề gì và mình còn ở Huế không?,"[""MLOps engineer"", ""Huế""]",Tôi đã ghi nhận: Hiện tại mình làm nghề gì và mình còn ở Huế không?,False,215,2245,,0
+baseline,conv-06,dungct,"Nếu phải chọn giữa nghề cũ và nghề mới, nghề hiện tại của mình là gì?","[""MLOps engineer""]","Tôi đã ghi nhận: Nếu phải chọn giữa nghề cũ và nghề mới, nghề hiện tại của mình là gì?",False,237,2664,,0
+baseline,conv-07,dungct,Mình thích style trả lời như thế nào và hiện đang ở đâu?,"[""ngắn gọn"", ""Huế""]",Tôi đã ghi nhận: Mình thích style trả lời như thế nào và hiện đang ở đâu?,False,218,2349,,0
+baseline,conv-08,dungct,Đồ uống và món ăn yêu thích của mình là gì?,"[""cà phê sữa đá"", ""mì Quảng""]",Tôi đã ghi nhận: Đồ uống và món ăn yêu thích của mình là gì?,False,210,2280,,0
+baseline,conv-08,dungct,Hiện tại mình đang ở đâu và mình nuôi con gì?,"[""Huế"", ""corgi""]",Tôi đã ghi nhận: Hiện tại mình đang ở đâu và mình nuôi con gì?,False,226,2676,,0
+baseline,conv-09,dungct,"Tóm tắt ngắn về mình: tên, nghề nghiệp hiện tại và hai mối quan tâm kỹ thuật chính.","[""DũngCT"", ""MLOps engineer"", ""Python"", ""AI""]","Tôi đã ghi nhận: Tóm tắt ngắn về mình: tên, nghề nghiệp hiện tại và hai mối quan tâm kỹ thuật chính.",False,223,2353,,0
+baseline,conv-10,dungct,"Nhắc lại giúp mình: tên, nơi ở hiện tại, nghề nghiệp hiện tại, đồ uống yêu thích và style trả lời mình thích.","[""DũngCT"", ""Huế"", ""MLOps engineer"", ""cà phê sữa đá"", ""ngắn gọn""]","Tôi đã ghi nhận: Nhắc lại giúp mình: tên, nơi ở hiện tại, nghề nghiệp hiện tại, đồ uống yêu thích và style trả lời mình thích.",False,270,3103,,0
+baseline,conv-10,dungct,"Nhắc lại giúp mình: tên, món ăn yêu thích và mình nuôi con gì.","[""DũngCT"", ""mì Quảng"", ""corgi""]","Tôi đã ghi nhận: Nhắc lại giúp mình: tên, món ăn yêu thích và mình nuôi con gì.",False,290,3628,,0
+advanced,conv-01,dungct,Mình tên gì và đồ uống yêu thích là gì?,"[""DũngCT"", ""cà phê sữa đá""]",Bạn đã nói tên là DũngCT,False,223,2587,302,0
+advanced,conv-02,dungct,Nhắc lại style trả lời mình thích và đồ uống yêu thích của mình.,"[""ngắn gọn"", ""cà phê sữa đá""]",Bạn muốn mình trả lời theo phong cách: h,False,218,2570,217,0
+advanced,conv-02,dungct,Tên mình là gì và mình thích kiểu trả lời như thế nào?,"[""DũngCT"", ""ngắn gọn""]",Bạn đã nói tên là DũngCT,False,224,2998,217,0
+advanced,conv-03,dungct,Hiện tại mình đang ở đâu?,"[""Huế""]","Tôi nhớ: # User profile: dungct 
+Trả lời: Hiện tại mình đang ở đâu?",False,270,2986,291,0
+advanced,conv-04,dungct,Món ăn yêu thích của mình là gì và mình nuôi con gì?,"[""mì Quảng"", ""corgi""]","Tôi nhớ: # User profile: dungct 
+Trả lời: Món ăn yêu thích của mình là gì và mình nuôi con gì?",False,243,2783,262,0
+advanced,conv-05,dungct,Bạn biết DũngCT là ai không? Hãy nhắc ngắn gọn tên và mối quan tâm chính của mình.,"[""DũngCT"", ""Python"", ""AI""]",Bạn đã nói tên là DũngCT,False,235,2880,262,0
+advanced,conv-06,dungct,Hiện tại mình làm nghề gì và mình còn ở Huế không?,"[""MLOps engineer"", ""Huế""]",Bạn hiện đang làm: thông tin cũ,False,178,2462,223,0
+advanced,conv-06,dungct,"Nếu phải chọn giữa nghề cũ và nghề mới, nghề hiện tại của mình là gì?","[""MLOps engineer""]",Bạn hiện đang làm: thông tin cũ,False,186,2874,223,0
+advanced,conv-07,dungct,Mình thích style trả lời như thế nào và hiện đang ở đâu?,"[""ngắn gọn"", ""Huế""]",Bạn muốn mình trả lời theo phong cách: i,False,236,2917,198,0
+advanced,conv-08,dungct,Đồ uống và món ăn yêu thích của mình là gì?,"[""cà phê sữa đá"", ""mì Quảng""]","Tôi nhớ: # User profile: dungct 
+Trả lời: Đồ uống và món ăn yêu thích của mình là gì?",False,258,2905,240,0
+advanced,conv-08,dungct,Hiện tại mình đang ở đâu và mình nuôi con gì?,"[""Huế"", ""corgi""]","Tôi nhớ: # User profile: dungct 
+Trả lời: Hiện tại mình đang ở đâu và mình nuôi con gì?",False,280,3389,240,0
+advanced,conv-09,dungct,"Tóm tắt ngắn về mình: tên, nghề nghiệp hiện tại và hai mối quan tâm kỹ thuật chính.","[""DũngCT"", ""MLOps engineer"", ""Python"", ""AI""]",Bạn đã nói tên là DũngCT,False,266,3061,220,0
+advanced,conv-10,dungct,"Nhắc lại giúp mình: tên, nơi ở hiện tại, nghề nghiệp hiện tại, đồ uống yêu thích và style trả lời mình thích.","[""DũngCT"", ""Huế"", ""MLOps engineer"", ""cà phê sữa đá"", ""ngắn gọn""]",Bạn đã nói tên là DũngCT,False,286,3662,314,0
+advanced,conv-10,dungct,"Nhắc lại giúp mình: tên, món ăn yêu thích và mình nuôi con gì.","[""DũngCT"", ""mì Quảng"", ""corgi""]",Bạn đã nói tên là DũngCT,False,292,4252,303,0
